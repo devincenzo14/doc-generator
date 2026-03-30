@@ -94,6 +94,7 @@ export interface InvoiceData {
   clientInfo: ClientInfo;
   items: LineItem[];
   totals: Totals;
+  preparedBy?: string;
   metadata: DocumentMetadata;
 }
 
@@ -102,6 +103,8 @@ export interface ReceiptData {
   paymentAmount: number;
   paymentMethod: string;
   referenceNumber: string;
+  receivedBy?: string;
+  preparedBy?: string;
   metadata: DocumentMetadata;
   items?: LineItem[];
 }
@@ -110,6 +113,7 @@ export interface QuotationData {
   clientInfo: ClientInfo;
   items: LineItem[];
   totals: Totals;
+  preparedBy?: string;
   metadata: DocumentMetadata & { validityDate: string };
 }
 
@@ -117,6 +121,8 @@ export interface PurchaseOrderData {
   supplierInfo: ClientInfo;
   items: LineItem[];
   totals: Totals;
+  preparedBy?: string;
+  approvedBy?: string;
   metadata: DocumentMetadata & { orderDate: string };
 }
 
@@ -237,6 +243,7 @@ export interface SalesReportData {
   reportPeriod: string;
   items: { id: string; product: string; quantity: number; revenue: number }[];
   totalRevenue: number;
+  preparedBy?: string;
   metadata: DocumentMetadata;
 }
 
@@ -244,6 +251,8 @@ export interface ExpenseReportData {
   reportPeriod: string;
   expenses: { id: string; description: string; category: string; amount: number; date: string }[];
   totalExpenses: number;
+  preparedBy?: string;
+  approvedBy?: string;
   metadata: DocumentMetadata;
 }
 

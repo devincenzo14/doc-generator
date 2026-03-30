@@ -20,6 +20,7 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         clientInfo: emptyClient(),
         items: [emptyItem()],
         totals: { subtotal: 0, tax: 0, taxRate: 0, discount: 0, total: 0 },
+        preparedBy: "",
         metadata: { ...baseMeta("INV"), dueDate: "" },
       };
     case "receipt":
@@ -28,6 +29,8 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         paymentAmount: 0,
         paymentMethod: "Cash",
         referenceNumber: "",
+        receivedBy: "",
+        preparedBy: "",
         metadata: baseMeta("RCT"),
       };
     case "quotation":
@@ -35,6 +38,7 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         clientInfo: emptyClient(),
         items: [emptyItem()],
         totals: { subtotal: 0, tax: 0, taxRate: 0, discount: 0, total: 0 },
+        preparedBy: "",
         metadata: { ...baseMeta("QUO"), validityDate: "" },
       };
     case "purchase-order":
@@ -42,6 +46,8 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         supplierInfo: emptyClient(),
         items: [emptyItem()],
         totals: { subtotal: 0, tax: 0, taxRate: 0, discount: 0, total: 0 },
+        preparedBy: "",
+        approvedBy: "",
         metadata: { ...baseMeta("PO"), orderDate: todayISO() },
       };
     case "delivery-receipt":
@@ -132,6 +138,7 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         reportPeriod: "",
         items: [{ id: createId(), product: "", quantity: 0, revenue: 0 }],
         totalRevenue: 0,
+        preparedBy: "",
         metadata: baseMeta("SR"),
       };
     case "expense-report":
@@ -139,6 +146,8 @@ export function getDefaultData(type: DocumentType): AnyDocumentData {
         reportPeriod: "",
         expenses: [{ id: createId(), description: "", category: "", amount: 0, date: todayISO() }],
         totalExpenses: 0,
+        preparedBy: "",
+        approvedBy: "",
         metadata: baseMeta("ER"),
       };
     case "inventory-summary":

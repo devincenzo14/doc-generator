@@ -22,6 +22,7 @@ const invoiceFields: FormFieldDef[] = [
   ...clientInfoFields,
   ...metadataFields,
   { name: "metadata.dueDate", label: "Due Date", type: "date", section: "Details" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
 ];
 
 const receiptFields: FormFieldDef[] = [
@@ -43,12 +44,15 @@ const receiptFields: FormFieldDef[] = [
     section: "Payment",
   },
   { name: "referenceNumber", label: "Reference Number", type: "text", section: "Payment" },
+  { name: "receivedBy", label: "Received By", type: "text", section: "Signatures" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
 ];
 
 const quotationFields: FormFieldDef[] = [
   ...clientInfoFields,
   ...metadataFields,
   { name: "metadata.validityDate", label: "Valid Until", type: "date", section: "Details" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
 ];
 
 const purchaseOrderFields: FormFieldDef[] = [
@@ -58,6 +62,8 @@ const purchaseOrderFields: FormFieldDef[] = [
   { name: "supplierInfo.address", label: "Supplier Address", type: "textarea", section: "Supplier Information" },
   ...metadataFields,
   { name: "metadata.orderDate", label: "Order Date", type: "date", section: "Details" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
+  { name: "approvedBy", label: "Approved By", type: "text", section: "Signatures" },
 ];
 
 const deliveryReceiptFields: FormFieldDef[] = [
@@ -146,11 +152,14 @@ const clientOnboardingFields: FormFieldDef[] = [
 const salesReportFields: FormFieldDef[] = [
   ...metadataFields,
   { name: "reportPeriod", label: "Report Period", type: "text", required: true, section: "Report" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
 ];
 
 const expenseReportFields: FormFieldDef[] = [
   ...metadataFields,
   { name: "reportPeriod", label: "Report Period", type: "text", required: true, section: "Report" },
+  { name: "preparedBy", label: "Prepared By", type: "text", section: "Signatures" },
+  { name: "approvedBy", label: "Approved By", type: "text", section: "Signatures" },
 ];
 
 const inventorySummaryFields: FormFieldDef[] = [...metadataFields];

@@ -42,6 +42,22 @@ interface DocumentPreviewProps {
   config: TemplateConfig;
 }
 
+function SignatureBlock({ entries }: { entries: { label: string; name: string }[] }) {
+  const filled = entries.filter((e) => e.name);
+  if (filled.length === 0) return null;
+  return (
+    <div className={`mt-10 grid gap-10 ${filled.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+      {filled.map((e, i) => (
+        <div key={i} className="text-sm">
+          <div className="border-t border-gray-400 pt-2 mt-10" />
+          <p className="font-medium text-gray-700">{e.name}</p>
+          <p className="text-gray-400 text-xs">{e.label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function DocumentPreview({ type, data, config }: DocumentPreviewProps) {
   const style = config.style;
 
@@ -121,6 +137,7 @@ function InvoicePreview({ data, config, style }: { data: InvoiceData; config: Te
       </div>
       <ItemsTable items={data.items} formatCurrency={fmt} />
       <TotalsBlock subtotal={data.totals.subtotal} tax={data.totals.tax} discount={data.totals.discount} total={data.totals.total} formatCurrency={fmt} />
+      <SignatureBlock entries={[{ label: "Prepared By", name: data.preparedBy || "" }]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
@@ -145,6 +162,10 @@ function ReceiptPreview({ data, config }: { data: ReceiptData; config: TemplateC
           <ItemsTable items={data.items} formatCurrency={fmt} />
         </>
       )}
+      <SignatureBlock entries={[
+        { label: "Received By", name: data.receivedBy || "" },
+        { label: "Prepared By", name: data.preparedBy || "" },
+      ]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
@@ -174,6 +195,7 @@ function QuotationPreview({ data, config }: { data: QuotationData; config: Templ
       </div>
       <ItemsTable items={data.items} formatCurrency={fmt} />
       <TotalsBlock subtotal={data.totals.subtotal} tax={data.totals.tax} discount={data.totals.discount} total={data.totals.total} formatCurrency={fmt} />
+      <SignatureBlock entries={[{ label: "Prepared By", name: data.preparedBy || "" }]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
@@ -193,6 +215,10 @@ function PurchaseOrderPreview({ data, config }: { data: PurchaseOrderData; confi
       ]} />
       <ItemsTable items={data.items} formatCurrency={fmt} />
       <TotalsBlock subtotal={data.totals.subtotal} tax={data.totals.tax} discount={data.totals.discount} total={data.totals.total} formatCurrency={fmt} />
+      <SignatureBlock entries={[
+        { label: "Prepared By", name: data.preparedBy || "" },
+        { label: "Approved By", name: data.approvedBy || "" },
+      ]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
@@ -442,6 +468,7 @@ function SalesReportPreview({ data, config }: { data: SalesReportData; config: T
         </tbody>
       </table>
       <div className="text-right font-bold">Total Revenue: {fmt(data.totalRevenue)}</div>
+      <SignatureBlock entries={[{ label: "Prepared By", name: data.preparedBy || "" }]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
@@ -461,6 +488,10 @@ function ExpenseReportPreview({ data, config }: { data: ExpenseReportData; confi
         </tbody>
       </table>
       <div className="text-right font-bold">Total Expenses: {fmt(data.totalExpenses)}</div>
+      <SignatureBlock entries={[
+        { label: "Prepared By", name: data.preparedBy || "" },
+        { label: "Approved By", name: data.approvedBy || "" },
+      ]} />
       <NotesBlock notes={data.metadata.notes} />
     </DocumentShell>
   );
